@@ -1811,10 +1811,10 @@ function markdown_parser($incoming_comment)
         return ($incoming_comment);
     }
 
-    $myCustomer = $wpdb->get_row("SELECT * FROM wp_comments");
+    $myCustomer = $wpdb->get_row("SELECT comment_markdown FROM wp_comments");
 
     //Add column if not present.
-    if (!isset($myCustomer->comment_markdown)) {
+    if (!$myCustomer) {
         $wpdb->query("ALTER TABLE wp_comments ADD comment_markdown text");
     }
     $comment_markdown_content = $incoming_comment['comment_content'];
